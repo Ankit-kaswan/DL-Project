@@ -1,2 +1,3 @@
-# DL-Project
-End to End deep learning project 
+# DL Project
+
+This is a boilerplate deep learning project using CNN architecture.
