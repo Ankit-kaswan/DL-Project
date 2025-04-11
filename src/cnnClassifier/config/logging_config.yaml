@@ -1,0 +1,10 @@
+log_level: "INFO"
+log_to_console: true
+log_to_file: true
+log_dir: "logs"
+log_filename: "running_logs.log"
+log_format: "[%(asctime)s: %(levelname)s: %(module)s: %(message)s]"
+rotation:
+when: "midnight"
+interval: 1
+backup_count: 7

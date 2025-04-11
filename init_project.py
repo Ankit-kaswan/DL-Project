@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 import logging
 import argparse
-
+from typing import Dict
 
 # Setup logging
 logging.basicConfig(
@@ -12,7 +12,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def create_default_file_content():
+def create_default_file_content() -> Dict[str, str]:
     """Creates and returns the default file content for necessary files."""
     return {
         "setup.py": """import setuptools
@@ -53,7 +53,7 @@ setuptools.setup(
     }
 
 
-def create_project_structure(project_name: str):
+def create_project_structure(project_name: str) -> None:
     """Creates the project directory structure and files."""
     # Get the default file content
     default_file_content = create_default_file_content()
@@ -99,10 +99,10 @@ def create_project_structure(project_name: str):
     logger.info("✅ Project structure created successfully!")
 
 
-def main():
+def main() -> None:
     """Main function to parse arguments and create the project structure."""
     parser = argparse.ArgumentParser()
-    parser.add_argument('--project', default='dlproject', help="Project name")
+    parser.add_argument('--project', default='cnnClassifier', help="Project name")
     args = parser.parse_args()
     create_project_structure(args.project)
 
