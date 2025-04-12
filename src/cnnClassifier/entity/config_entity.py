@@ -9,3 +9,10 @@ class DataIngestionConfig:
     source_URL: str
     local_data_file: Path
     unzip_dir: Path
+
+
+@dataclass
+class DataValidationConfig:
+    unzip_dir: str
+    required_files: List[str]
+
