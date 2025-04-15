@@ -9,7 +9,8 @@ from cnnClassifier.entity.config_entity import (
     PrepareBaseModelConfig,
     PrepareCallbacksConfig,
     TrainingConfig,
-    EvaluationConfig
+    EvaluationConfig,
+    PredictionConfig
 )
 from cnnClassifier.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 
@@ -109,4 +110,18 @@ class ConfigurationManager:
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE,
+        )
+
+    def get_prediction_config(self) -> PredictionConfig:
+        prediction = self.config.prediction
+        params = self.params.IMAGE_SIZE
+
+        return PredictionConfig(
+            root_dir=Path(prediction.root_dir),
+            model_path=Path(prediction.model_path),
+            input_data_dir=Path(prediction.input_data_dir),
+            output_file_path=Path(prediction.output_file_path),
+            image_size=(params[0], params[1]),
+            batch_size=self.params.BATCH_SIZE,
+            class_names=self.config.training.class_names
         )
