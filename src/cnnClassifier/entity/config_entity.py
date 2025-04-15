@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 
 
 @dataclass(frozen=True)
@@ -64,3 +64,15 @@ class EvaluationConfig:
     params_image_size: list
     params_batch_size: int
     score_file_path: Path = Path("scores.json")  # Optional
+
+
+@dataclass(frozen=True)
+class PredictionConfig:
+    root_dir: Path
+    model_path: Path
+    input_data_dir: Path
+    output_file_path: Path
+    image_size: Tuple[int, int]
+    batch_size: int
+    class_names: List[str]
+
