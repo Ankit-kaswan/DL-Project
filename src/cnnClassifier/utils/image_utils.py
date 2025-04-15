@@ -1,10 +1,13 @@
 """
 image_utils.py
 
-Contains functions to encode and decode images using base64.
+Contains functions to encode and decode images using base64,
+as well as loading and preprocessing images for models.
 """
 
 import base64
+import numpy as np
+from tensorflow.keras.preprocessing import image
 
 
 def decode_image(img_string: str, file_name: str) -> None:
@@ -32,3 +35,21 @@ def encode_image_to_base64(cropped_image_path: str) -> bytes:
     """
     with open(cropped_image_path, "rb") as f:
         return base64.b64encode(f.read())
+
+
+def load_image_from_path(image_path: str, target_size=(224, 224), color_mode="rgb") -> np.ndarray:
+    """
+    Load and preprocess an image from a given file path.
+
+    Args:
+        image_path (str): Path to the image.
+        target_size (tuple): Desired image size, e.g., (224, 224).
+        color_mode (str): Color mode to load the image ('rgb', 'grayscale').
+
+    Returns:
+        np.ndarray: Preprocessed image ready for model input.
+    """
+    img = image.load_img(image_path, target_size=target_size, color_mode=color_mode)
+    img_array = image.img_to_array(img)
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
