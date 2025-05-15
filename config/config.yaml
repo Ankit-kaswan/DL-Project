@@ -1,0 +1,35 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_URL: https://github.com/entbappy/Branching-tutorial/raw/master/Chicken-fecal-images.zip
+  local_data_file: artifacts/data_ingestion/data.zip
+  unzip_dir: artifacts/data_ingestion
+
+data_validation:
+  root_dir: artifacts/data_validation
+  status_file: artifacts/data_validation/status.txt
+  all_required_files:
+    - artifacts/data_ingestion/Chicken-fecal-images/train
+    - artifacts/data_ingestion/Chicken-fecal-images/test
+
+data_transformation:
+  train_dir: artifacts/data_ingestion/Chicken-fecal-images/train
+  test_dir: artifacts/data_ingestion/Chicken-fecal-images/test
+  image_size: [224, 224]
+  batch_size: 32
+
+training:
+  root_dir: artifacts/training
+  trained_model_path: artifacts/training/model.h5
+  class_names: ["Coccidiosis", "Healthy"]
+
+evaluation:
+  path_of_model: artifacts/training/model.h5
+  training_data: artifacts/data_ingestion/Chicken-fecal-images
+
+prediction:
+  root_dir: artifacts/prediction
+  model_path: artifacts/training/model.h5
+  input_data_dir: data/predict
+  output_file_path: artifacts/prediction/predictions.json
